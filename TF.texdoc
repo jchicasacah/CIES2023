@@ -85,6 +85,9 @@ El propósito de este ejercicio es estimar el efecto del programa sobre la tasa 
 \vspace{0.5cm}
 
 a) Organice (comando sort) la base en función de las variables "folio" (identificado de hogar), 'ID' (identificador del individuo dentro de su hogar) y 'periodo'. Genere un identificador para cada individuo juntando las variables ID y folio. 
+
+ddfggdgdsdskdspkfksfkfkfk $\epsilon ^2$
+
 ***/
 
 texdoc stlog
