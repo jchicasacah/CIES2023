@@ -1,0 +1,17 @@
+. **** Generamos variable dummmy cuando el tratamiento comienza. El programa comenzó a intervenir 
+> a los beneficiarios en junio de 1998
+. gen time = (periodo>=3) \& !missing(periodo) 
+{\smallskip}
+. rename part_ treated
+{\smallskip}
+. **** Creamos la interaccion entre ambos
+. gen did = time*treated  
+{\smallskip}
+. **** Le indicamos a stata que trabajamos con un panel
+. xtset Id Periodo 
+{\smallskip}
+Panel variable: Id (strongly balanced)
+ Time variable: Periodo, 1 to 5
+         Delta: 1 unit
+{\smallskip}
+. 

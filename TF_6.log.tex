@@ -1,0 +1,122 @@
+. xtset Id Periodo
+{\smallskip}
+Panel variable: Id (strongly balanced)
+ Time variable: Periodo, 1 to 5
+         Delta: 1 unit
+{\smallskip}
+. * Con reg
+. reg everschool time treated did
+{\smallskip}
+      Source {\VBAR}       SS           df       MS      Number of obs   =    73,291
+\HLI{13}{\PLUS}\HLI{34}   F(3, 73287)     =     70.07
+       Model {\VBAR}  5.51041576         3  1.83680525   Prob > F        =    0.0000
+    Residual {\VBAR}  1920.99871    73,287  .026211998   R-squared       =    0.0029
+\HLI{13}{\PLUS}\HLI{34}   Adj R-squared   =    0.0028
+       Total {\VBAR}  1926.50912    73,290  .026286112   Root MSE        =     .1619
+{\smallskip}
+\HLI{13}{\TOPT}\HLI{64}
+  everschool {\VBAR} Coefficient  Std. err.      t    P>|t|     [95\% conf. interval]
+\HLI{13}{\PLUS}\HLI{64}
+        time {\VBAR}   .0205864   .0019263    10.69   0.000     .0168108    .0243619
+     treated {\VBAR}   .0123945   .0019265     6.43   0.000     .0086186    .0161705
+         did {\VBAR}  -.0084079   .0024894    -3.38   0.001    -.0132871   -.0035287
+       _cons {\VBAR}   .9562489   .0014908   641.43   0.000      .953327    .9591709
+\HLI{13}{\BOTT}\HLI{64}
+{\smallskip}
+. 
+. * Con xtreg
+. xtreg everschool time treated did, fe 
+note: {\bftt{treated}} omitted because of collinearity.
+{\smallskip}
+Fixed-effects (within) regression               Number of obs     =     73,291
+Group variable: Id                              Number of groups  =     14,748
+{\smallskip}
+R-squared:                                      Obs per group:
+     Within  = 0.0062                                         min =          2
+     Between = 0.0002                                         avg =        5.0
+     Overall = 0.0017                                         max =          5
+{\smallskip}
+                                                F(2,58541)        =     183.58
+corr(u_i, Xb) = -0.0105                         Prob > F          =     0.0000
+{\smallskip}
+\HLI{13}{\TOPT}\HLI{64}
+  everschool {\VBAR} Coefficient  Std. err.      t    P>|t|     [95\% conf. interval]
+\HLI{13}{\PLUS}\HLI{64}
+        time {\VBAR}   .0196548   .0012939    15.19   0.000     .0171188    .0221907
+     treated {\VBAR}          0  (omitted)
+         did {\VBAR}   -.007285   .0016721    -4.36   0.000    -.0105624   -.0040077
+       _cons {\VBAR}   .9638256   .0006335  1521.49   0.000      .962584    .9650673
+\HLI{13}{\PLUS}\HLI{64}
+     sigma_u {\VBAR}  .13072244
+     sigma_e {\VBAR}  .10841536
+         rho {\VBAR}  .59247658   (fraction of variance due to u_i)
+\HLI{13}{\BOTT}\HLI{64}
+F test that all u_i=0: F(14747, 58541) = 7.12                Prob > F = 0.0000
+{\smallskip}
+. 
+. * Forma alternativa:
+. xtreg everschool time\#\#treated, fe 
+note: {\bftt{1.treated}} omitted because of collinearity.
+{\smallskip}
+Fixed-effects (within) regression               Number of obs     =     73,291
+Group variable: Id                              Number of groups  =     14,748
+{\smallskip}
+R-squared:                                      Obs per group:
+     Within  = 0.0062                                         min =          2
+     Between = 0.0002                                         avg =        5.0
+     Overall = 0.0017                                         max =          5
+{\smallskip}
+                                                F(2,58541)        =     183.58
+corr(u_i, Xb) = -0.0105                         Prob > F          =     0.0000
+{\smallskip}
+\HLI{13}{\TOPT}\HLI{64}
+  everschool {\VBAR} Coefficient  Std. err.      t    P>|t|     [95\% conf. interval]
+\HLI{13}{\PLUS}\HLI{64}
+      1.time {\VBAR}   .0196548   .0012939    15.19   0.000     .0171188    .0221907
+             {\VBAR}
+     treated {\VBAR}
+  Participa  {\VBAR}          0  (omitted)
+             {\VBAR}
+time\#treated {\VBAR}
+1\#Participa  {\VBAR}   -.007285   .0016721    -4.36   0.000    -.0105624   -.0040077
+             {\VBAR}
+       _cons {\VBAR}   .9638256   .0006335  1521.49   0.000      .962584    .9650673
+\HLI{13}{\PLUS}\HLI{64}
+     sigma_u {\VBAR}  .13072244
+     sigma_e {\VBAR}  .10841536
+         rho {\VBAR}  .59247658   (fraction of variance due to u_i)
+\HLI{13}{\BOTT}\HLI{64}
+F test that all u_i=0: F(14747, 58541) = 7.12                Prob > F = 0.0000
+{\smallskip}
+. 
+. 
+. **** Paquete diff: nos hace todo esto sin escribir las regresiones
+. 
+. *ssc install diff // Lo instalamos 
+. 
+. diff everschool, t(treated) p(time)
+{\smallskip}
+{\bftt{{\underbar{DIFFERENCE-IN-DIFFERENCES ESTIMATION RESULTS}}}}
+Number of observations in the DIFF-IN-DIFF: 73291
+            Before         After    
+   Control: 11794          17613       29407
+   Treated: 17604          26280       43884
+            29398          43893
+\HLI{56}
+ Outcome var.   {\VBAR} evers{\tytilde}l {\VBAR} S. Err. {\VBAR}   |t|   {\VBAR}  P>|t|
+\HLI{16}{\PLUS}\HLI{9}{\PLUS}\HLI{9}{\PLUS}\HLI{9}{\PLUS}\HLI{9}
+Before          {\VBAR}         {\VBAR}         {\VBAR}         {\VBAR} 
+   Control      {\VBAR} 0.956   {\VBAR}         {\VBAR}         {\VBAR} 
+   Treated      {\VBAR} 0.969   {\VBAR}         {\VBAR}         {\VBAR} 
+   Diff (T-C)   {\VBAR} 0.012   {\VBAR} 0.002   {\VBAR} 6.43    {\VBAR} 0.000***
+After           {\VBAR}         {\VBAR}         {\VBAR}         {\VBAR} 
+   Control      {\VBAR} 0.977   {\VBAR}         {\VBAR}         {\VBAR} 
+   Treated      {\VBAR} 0.981   {\VBAR}         {\VBAR}         {\VBAR} 
+   Diff (T-C)   {\VBAR} 0.004   {\VBAR} 0.002   {\VBAR} 2.53    {\VBAR} 0.011**
+                {\VBAR}         {\VBAR}         {\VBAR}         {\VBAR} 
+Diff-in-Diff    {\VBAR} -0.008  {\VBAR} 0.002   {\VBAR} 3.38    {\VBAR} 0.001***
+\HLI{56}
+R-square:    0.00
+* Means and Standard Errors are estimated by linear regression
+**Inference: *** p<0.01; ** p<0.05; * p<0.1
+{\smallskip}

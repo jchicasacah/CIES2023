@@ -1,0 +1,16 @@
+. gen poLB = 0
+{\smallskip}
+. bys folio: replace poLB = 1 if pobre == 1 \& periodo==1
+(14,748 real changes made)
+{\smallskip}
+. egen polb= max(poLB > 0), by(folio)
+{\smallskip}
+. tab polb
+{\smallskip}
+       polb {\VBAR}      Freq.     Percent        Cum.
+\HLI{12}{\PLUS}\HLI{35}
+          0 {\VBAR}     31,825       30.15       30.15
+          1 {\VBAR}     73,740       69.85      100.00
+\HLI{12}{\PLUS}\HLI{35}
+      Total {\VBAR}    105,565      100.00
+{\smallskip}

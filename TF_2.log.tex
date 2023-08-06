@@ -1,0 +1,26 @@
+. 
+. notes: Nos generamos una dummy por cada periodo de la encuesta
+{\smallskip}
+. tab periodo, nol
+{\smallskip}
+   Fecha de {\VBAR}
+   encuesta {\VBAR}      Freq.     Percent        Cum.
+\HLI{12}{\PLUS}\HLI{35}
+          1 {\VBAR}     21,113       20.00       20.00
+          2 {\VBAR}     21,113       20.00       40.00
+          3 {\VBAR}     21,113       20.00       60.00
+          4 {\VBAR}     21,113       20.00       80.00
+          5 {\VBAR}     21,113       20.00      100.00
+\HLI{12}{\PLUS}\HLI{35}
+      Total {\VBAR}    105,565      100.00
+{\smallskip}
+. forvalues i=1/5 {\lbr}
+  2.     g enc`i'=0
+  3.         replace enc`i' = 1 if periodo==`i'
+  4. {\rbr}
+(21,113 real changes made)
+(21,113 real changes made)
+(21,113 real changes made)
+(21,113 real changes made)
+(21,113 real changes made)
+{\smallskip}
